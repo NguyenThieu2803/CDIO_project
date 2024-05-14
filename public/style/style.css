@@ -1,0 +1,88 @@
+.app-container {
+    padding: 12px;
+    min-height: 380px;
+    background-color: #a9abad;
+    /* container background color */
+    border-radius: 8px;
+    width: 300px;
+    height: 450px;
+
+
+}
+
+.app-container .danhgia {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    height: 53px;
+}
+
+h1 {
+    width: 230px;
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    background-color: rgb(160, 165, 223);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* SRART */
+.star_wrap {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+input {
+    appearance: none;
+}
+
+input::before {
+    content: "\2605";
+    color: #ccc;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+input:checked::before,
+input:checked~input::before {
+    color: #ffb800;
+}
+
+.ghichu {
+    margin-bottom: 20px;
+    /* Khoảng cách dưới */
+}
+
+.ghichu div {
+    font-weight: bold;
+    /* In đậm cho phần tiêu đề */
+}
+
+.ghichu textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.ghichu button {
+    background-color: lightsalmon;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    float: right;
+}
+
+.ghichu button:hover {
+    background-color: rgb(248, 246, 246);
+    color: lightsalmon;
+}
