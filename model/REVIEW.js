@@ -12,7 +12,8 @@ const Review = sequelize_sqlserver.define('REVIEW', {
     RATING: DataTypes.INTEGER,
     DATE: DataTypes.DATE,
     LIKE: DataTypes.INTEGER,
-    RECIPE_ID: DataTypes.STRING(50)
+    RECIPE_ID: DataTypes.STRING(50),
+    USER_IMG: DataTypes.STRING(50)
 }, { sequelize_sqlserver, modelName: 'REVIEW', tableName: 'REVIEW' });
 
 

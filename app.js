@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const init_API_Rank = require('./router/api/routerAPI');
+const init_API_Review = require('./router/api/API_Review')
 const route = require('./router/router');
 // // middleware
 app.use(express.static('./public'));
@@ -22,6 +23,8 @@ app.use(express.static(path.join(__dirname,'public')));
 
 // Api routes
 init_API_Rank(app);
+init_API_Review(app);
+
 const port = process.env.PORT;
 
 const start = async () => {
