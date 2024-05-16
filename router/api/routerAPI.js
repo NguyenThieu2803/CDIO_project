@@ -4,7 +4,7 @@ const { GetAllRecipe } = require('../../controller/APIcontroller');
 
 
 const init_API_Rank = (app) => {
-    router.get('/Rank', GetAllRecipe);
+    router.get('/Alldata', GetAllRecipe);
     app.use('/api/v1/', router);
 }
 
