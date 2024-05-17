@@ -9,7 +9,7 @@ const Ingredient = require('../model/INGREDIENT');
 const Review = require('../model/REVIEW');
 const Distributor = require('../model/DISTRIBUTOR');
 
-const {GetAllreviewdata}= require('../service/GetAllReviewdata');
+const {GetAllreviewdata,GetIngredient,GetAllInstruction}= require('../service/GetAllReviewdata');
 const { defineAssociation, } = require('../config/associations');
 
 
@@ -60,8 +60,29 @@ const GetAllReviews = async (req, res) => {
 };
 
 
+const GetAllIngredient=async (req, res) =>{
+   try {
+      console.log(req.params.id)
+       const data = await GetIngredient(req.params.id);
+       res.status(201).json({ data });
+   } catch (error) {
+       console.error("Error in GetAllIngredient:", error);
+       res.status(500).json({ message: "Internal server error" });
+   }
+}
+ const GetAllinstruction = async (req, res) =>{
+   try {
+      console.log(req.params.id)
+       const data = await GetAllInstruction(req.params.id);
+       res.status(201).json({ data });
+   } catch (error) {
+       console.error("Error in GetAllReviews:", error);
+       res.status(500).json({ message: "Internal server error" });
+   }
+ }
+
 
 
 module.exports ={
-   GetAllRecipe,GetAllReviews
+   GetAllRecipe,GetAllReviews,GetAllIngredient,GetAllinstruction
 }

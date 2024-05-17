@@ -13,7 +13,18 @@ const defineAssociation = () => {
     Recipe.belongsTo(Instructor, { foreignKey: 'INSTRUCTION_ID' });
     Recipe.belongsTo(Ingredient, { foreignKey: 'INGREDIENT_ID' });
     Recipe.belongsTo(Review, { foreignKey: 'REVIEW_ID' });
-    Recipe.hasMany(Review, { foreignKey: 'RECIPE_ID'});  
+    Recipe.hasMany(Review, { foreignKey: 'RECIPE_ID'});
+    Review.belongsTo(Recipe, {
+        foreignKey: 'RECIPE_ID'
+    });  
+    Recipe.hasMany(Instructor, { foreignKey: 'RECIPE_ID'});
+    Instructor.belongsTo(Recipe, {
+        foreignKey: 'RECIPE_ID'
+    }); 
+    Recipe.hasMany(Ingredient, { foreignKey: 'RECIPE_ID'});
+    Ingredient.belongsTo(Recipe, {
+        foreignKey: 'RECIPE_ID'
+    }); 
     Dish.belongsTo(Distributor, { foreignKey: 'DISTRIBUTOR_ID' });
 }
 

@@ -19,13 +19,38 @@ const GetAllreviewdata=async (Id)=>{
     const data = await Review.findAll({
         where:{
             RECIPE_ID:Id
-        }
+        },
+        include:[{
+            model:Recipe,
+            attributes:['IMG_URL','DESCRIPTION'],
+            where: {
+                RECIPE_ID:Id
+            }
+        }]
     })
     return data;
 }
 
 
+const GetIngredient = (Id) =>{
+      const data = Ingredient.findAll({
+        where:{
+            RECIPE_ID:Id
+        },
+    })
+    return data;
+}
+
+const GetAllInstruction = (Id) =>{
+    const data = Instructor.findAll({
+        where:{
+            RECIPE_ID:Id
+        },
+    })
+    return data;
+}
+
 
 module.exports={
-    GetAllreviewdata
+    GetAllreviewdata,GetIngredient,GetAllInstruction
 }
