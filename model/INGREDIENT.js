@@ -17,6 +17,10 @@ const Ingredient = sequelize_sqlserver.define('INGREDIENT', {
   AMOUNT: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  RECIPE_ID: {
+    type: DataTypes.STRING(50),
+    allowNull: false
   }
 }, {
   tableName: 'INGREDIENT',
