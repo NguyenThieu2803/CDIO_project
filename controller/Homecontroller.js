@@ -22,8 +22,15 @@ const GetHomepage = async (req, res) => {
       
 }
 
+const GetgioithieuPage = async (req,res)=>{
+   res.render('GioiThieu.ejs');
+}
 
+const GetHoiDap = async (req,res)=>{
+   res.render('HoiDap.ejs');
+}
 
 module.exports = {
-   GetHomepage
+   GetHomepage,GetgioithieuPage,GetHoiDap
 }
+

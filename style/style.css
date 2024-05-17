@@ -86,7 +86,3 @@ input:checked~input::before {
     background-color: rgb(248, 246, 246);
     color: lightsalmon;
 }
-
-.float-right {
-    float: right;
-}
