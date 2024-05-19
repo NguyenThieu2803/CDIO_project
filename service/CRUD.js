@@ -1,4 +1,3 @@
-
 const { sequelize_sqlserver } = require('../config/Sequelize');
 const express = require('express');
 const Recipe = require('../model/RECIPE');
@@ -11,31 +10,14 @@ const Distributor = require('../model/DISTRIBUTOR');
 
 
 const { defineAssociation, } = require('../config/associations');
+const { name } = require('ejs');
 
 
 defineAssociation();
 
 
-//get data homepage
-const GetHomepage = async (req, res) => {
- res.render('PageHome.ejs');
-      
+
+
+const PostCreateRecipe = async(id,name,description)=>{
+    
 }
-
-const GetgioithieuPage = async (req,res)=>{
-   res.render('GioiThieu.ejs');
-}
-
-const GetHoiDap = async (req,res)=>{
-   res.render('HoiDap.ejs');
-}
-
-
-const CreateRecipe= async (req,res)=>{
-   res.render('CreateRecipe.ejs');
-}
-
-module.exports = {
-   GetHomepage,GetgioithieuPage,GetHoiDap,CreateRecipe
-}
-

@@ -51,7 +51,11 @@ const GetAllRecipe = async (req, res) => {
 const GetAllReviews = async (req, res) => {
    try {
       console.log(req.params.id)
+      if (isNaN(req.params.id)) {
+         return res.status(400).json({ message: "Invalid ID parameter" });
+     }
        const data = await GetAllreviewdata(req.params.id);
+       
        res.status(201).json({ data });
    } catch (error) {
        console.error("Error in GetAllReviews:", error);
