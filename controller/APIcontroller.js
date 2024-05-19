@@ -9,7 +9,7 @@ const Ingredient = require('../model/INGREDIENT');
 const Review = require('../model/REVIEW');
 const Distributor = require('../model/DISTRIBUTOR');
 
-const {GetAllreviewdata,GetIngredient,GetAllInstruction}= require('../service/GetAllReviewdata');
+const {GetAllreviewdata,GetIngredient,GetAllInstruction,GetAllRecipeByDifficulty,Getdatadifficult}= require('../service/GetAlldata');
 const { defineAssociation, } = require('../config/associations');
 
 
@@ -86,7 +86,26 @@ const GetAllIngredient=async (req, res) =>{
  }
 
 
+ const GetFilteBydifficulty = async (req, res) =>{
+   try {
+      const {difficulty,event} = req.query;
+      const data = await GetAllRecipeByDifficulty(difficulty,event);
+      res.status(201).json({ data });
+   } catch (error) {
+      console.error(error)
+   }
+ }
+const Getdifficult = async (req, res) =>{
+   try {
+      const data = await Getdatadifficult();
+      res.status(201).json({ data });
+   } catch (error) {
+      console.error(error)
+   }
+ 
+}
+
 
 module.exports ={
-   GetAllRecipe,GetAllReviews,GetAllIngredient,GetAllinstruction
+   GetAllRecipe,GetAllReviews,GetAllIngredient,GetAllinstruction,GetFilteBydifficulty,Getdifficult
 }

@@ -6,6 +6,9 @@ const init_API_Rank = require('./router/api/routerAPI');
 const init_API_Review = require('./router/api/API_Review');
 const init_API_Ingredient = require('./router/api/API_Ingredient');
 const init_API_Intruction = require('./router/api/API_Instruction');
+const init_API_Difficulty = require('./router/api/API_difficultRecipe');
+const init_API_datadifficult = require('./router/api/API_listDifficult');
+
 const route = require('./router/router');
 // // middleware
 app.use(express.static('./public'));
@@ -28,7 +31,8 @@ init_API_Rank(app);
 init_API_Review(app);
 init_API_Ingredient(app);
 init_API_Intruction(app);
-
+init_API_Difficulty(app);
+init_API_datadifficult(app);
 const port = process.env.PORT;
 
 const start = async () => {
