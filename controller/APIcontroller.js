@@ -9,7 +9,7 @@ const Ingredient = require('../model/INGREDIENT');
 const Review = require('../model/REVIEW');
 const Distributor = require('../model/DISTRIBUTOR');
 
-const {GetAllreviewdata,GetIngredient,GetAllInstruction,GetAllRecipeByDifficulty,Getdatadifficult}= require('../service/GetAlldata');
+const {GetAllreviewdata,GetIngredient,GetAllInstruction,GetAllRecipeByDifficulty,Getdatadifficult,DataEvent}= require('../service/GetAlldata');
 const { defineAssociation, } = require('../config/associations');
 
 
@@ -89,7 +89,7 @@ const GetAllIngredient=async (req, res) =>{
  const GetFilteBydifficulty = async (req, res) =>{
    try {
       const {difficulty,event} = req.query;
-      const data = await GetAllRecipeByDifficulty(difficulty,event);
+      const data = await GetAllRecipeByDifficulty(difficulty === undefined ? null : difficulty, event === undefined ? null : event);
       res.status(201).json({ data });
    } catch (error) {
       console.error(error)
@@ -105,7 +105,16 @@ const Getdifficult = async (req, res) =>{
  
 }
 
+const GetDataEvent = async (req, res) =>{
+  try {
+   const data = await DataEvent();
+   res.status(201).json({ data });
+  } catch (error) {
+   console.log(error);
+  }
+
+}
 
 module.exports ={
-   GetAllRecipe,GetAllReviews,GetAllIngredient,GetAllinstruction,GetFilteBydifficulty,Getdifficult
+   GetAllRecipe,GetAllReviews,GetAllIngredient,GetAllinstruction,GetFilteBydifficulty,Getdifficult,GetDataEvent
 }

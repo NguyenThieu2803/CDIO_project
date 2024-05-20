@@ -2,10 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const TableRank = document.querySelector('#data-Ranktable tbody');
   const Tasksbody = document.querySelector('#task-body');
   const ModalContent = document.querySelector('.comment_content');
-const IngredientContent = document.querySelector('.ingredient_content');
-const InstructionContent = document.querySelector('.Intsruction_content');
+  const IngredientContent = document.querySelector('.ingredient_content');
+  const InstructionContent = document.querySelector('.Intsruction_content');
+  const dropEventbtn = document.querySelector('#select_event');
+  const dropDifbtn = document.querySelector('#select_dif');
+
   // Function to render the table rank and cards from API data
-  const showRanktable = async () => {
+  const showRanktable = async (difficulty = null, event = null) => {
     try {
       const url = 'http://localhost:3000/api/v1/Alldata';
       const response = await axios.get(url);
@@ -21,8 +24,19 @@ const InstructionContent = document.querySelector('.Intsruction_content');
       TableRank.innerHTML = '';
       Tasksbody.innerHTML = '';
 
+      // Filter recipes based on difficulty and event if provided
+      const filteredRecipes = sortedRecipes.filter(recipe => {
+        return (!difficulty || recipe.DIFFICULTY_LEVEL === difficulty) &&
+               (!event || recipe.EVENT === event);
+      });
+
+      const filteredTasks = Tasks.filter(task => {
+        return (!difficulty || task.DIFFICULTY_LEVEL === difficulty) &&
+               (!event || task.EVENT === event);
+      });
+
       // Append each recipe to the table
-      sortedRecipes.forEach(item => {
+      filteredRecipes.forEach(item => {
         TableRank.innerHTML += `
           <tr>
             <th scope="row">${item.RECIPE_NAME}</th>
@@ -32,7 +46,7 @@ const InstructionContent = document.querySelector('.Intsruction_content');
       });
 
       // Append each card to the task body
-      Tasks.forEach((item, index) => {
+      filteredTasks.forEach((item, index) => {
         // Create a new row for every three items
         if (index % 3 === 0) {
           var row = document.createElement('div');
@@ -76,9 +90,6 @@ const InstructionContent = document.querySelector('.Intsruction_content');
     }
   };
 
-  // Call the function to render the table and cards
-  showRanktable();
-
   // Function to show danh gia model
   const showDanhgiamodel = async (Id) => {
     console.log(Id); // Log the Id when the button is clicked
@@ -87,13 +98,12 @@ const InstructionContent = document.querySelector('.Intsruction_content');
       const response = await axios.get(url);
       const data = response.data.data;
 
-// data ingredients
+      // Data ingredients
       const result = await axios.get(`http://localhost:3000/api/v1/Ingredient/${Id}`);
-      const Ingredient = result.data.data; 
-// data Instructions
-const result1 = await axios.get(`http://localhost:3000/api/v1/Instruction/${Id}`);
-const Instruction = result1.data.data;
-
+      const Ingredient = result.data.data;
+      // Data Instructions
+      const result1 = await axios.get(`http://localhost:3000/api/v1/Instruction/${Id}`);
+      const Instruction = result1.data.data;
 
       console.log(Ingredient); // Log the data when the button is clicked
       console.log(Instruction); //
@@ -117,23 +127,70 @@ const Instruction = result1.data.data;
         `;
       });
 
-      //Append the ingredients
-      IngredientContent.innerHTML='';
+      // Append the ingredients
+      IngredientContent.innerHTML = '';
 
       Ingredient.forEach(item => {
         IngredientContent.innerHTML += `
-        <p>- ${item.AMOUNT} gram ${ item.NAME}</p>
-        `
-      })
-// Append the Instructions
+          <p>- ${item.AMOUNT} gram ${item.NAME}</p>
+        `;
+      });
 
-InstructionContent.innerHTML='';
-Instruction.forEach(item =>{
-  InstructionContent.innerHTML += `<p> -Step ${ item.STEP_NUMER} : ${ item.STEP_DESCRIPTION} </p>`
-});
-      // Handle review data
+      // Append the Instructions
+      InstructionContent.innerHTML = '';
+      Instruction.forEach(item => {
+        InstructionContent.innerHTML += `<p> - Step ${item.STEP_NUMER}: ${item.STEP_DESCRIPTION} </p>`;
+      });
     } catch (error) {
       console.error('Error fetching review:', error);
     }
   };
-}); 
+
+  // Function to show data in dropdown list
+  const showdatadropdownlist = async () => {
+    try {
+      // Data event
+      const url = `http://localhost:3000/api/v1/dataEvent`;
+      const response = await axios.get(url);
+      const data = response.data.data;
+
+      // Clear existing options
+      dropEventbtn.innerHTML = '<option selected>Chọn</option>';
+
+      // Append new options from API data
+      data.forEach(item => {
+        dropEventbtn.innerHTML += `
+          <option value="${item.EVENT}">${item.EVENT}</option>
+        `;
+      });
+
+      // Data difficulty
+      const url1 = `http://localhost:3000/api/v1/datadifficulty`;
+      const response1 = await axios.get(url1);
+      const datadif = response1.data.data;
+      dropDifbtn.innerHTML = '<option selected>Chọn</option>';
+
+      // Append new options from API data
+      datadif.forEach(item => {
+        dropDifbtn.innerHTML += `
+          <option value="${item.DIFFICULTY_LEVEL}">${item.DIFFICULTY_LEVEL}</option>
+        `;
+      });
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
+
+  // Filter recipes based on selected dropdown options
+  const filterRecipes = () => {
+    const filterEvent = dropEventbtn.value !== 'Chọn' ? dropEventbtn.value : null;
+    const filterDif = dropDifbtn.value !== 'Chọn' ? dropDifbtn.value : null;
+    showRanktable(filterDif, filterEvent);
+  };
+
+  dropDifbtn.addEventListener('change', filterRecipes);
+  dropEventbtn.addEventListener('change', filterRecipes);
+
+  showRanktable();
+  showdatadropdownlist();
+});

@@ -8,7 +8,7 @@ const init_API_Ingredient = require('./router/api/API_Ingredient');
 const init_API_Intruction = require('./router/api/API_Instruction');
 const init_API_Difficulty = require('./router/api/API_difficultRecipe');
 const init_API_datadifficult = require('./router/api/API_listDifficult');
-
+const init_API_difficulty = require('./router/api/API_dataEvent');
 const route = require('./router/router');
 // // middleware
 app.use(express.static('./public'));
@@ -33,6 +33,7 @@ init_API_Ingredient(app);
 init_API_Intruction(app);
 init_API_Difficulty(app);
 init_API_datadifficult(app);
+init_API_difficulty(app);
 const port = process.env.PORT;
 
 const start = async () => {

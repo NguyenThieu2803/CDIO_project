@@ -50,14 +50,22 @@ const GetAllInstruction = (Id) => {
     return data;
 }
 
-const GetAllRecipeByDifficulty = async (difficulty, event) => {
+const GetAllRecipeByDifficulty = async (difficulty = null, event = null) => {
+    // Tạo đối tượng where linh hoạt dựa trên các điều kiện
+    let whereClause = {};
+
+    if (difficulty !== null && difficulty !== 'null') {
+        whereClause.DIFFICULTY_LEVEL = difficulty;
+    }
+
+    if (event !== null && event !== 'null') {
+        whereClause.EVENT = event;
+    }
 
     const recipe = await Recipe.findAll({
-        where: {
-            DIFFICULTY_LEVEL: difficulty,
-            EVENT: event
-        }
-    })
+        where: whereClause
+    });
+
     return recipe;
 }
 
@@ -68,7 +76,7 @@ const Getdatadifficult = async () => {
     return difficulty;
 }
 
-const GetDataEvent = async () => {
+const DataEvent = async () => {
     const event = await Recipe.findAll({
         attributes: [sequelize_sqlserver.fn('DISTINCT', sequelize_sqlserver.col('EVENT')), 'EVENT']
     })
@@ -76,5 +84,5 @@ const GetDataEvent = async () => {
 }
 
 module.exports = {
-    GetAllreviewdata, GetIngredient, GetAllInstruction, GetAllRecipeByDifficulty, Getdatadifficult,GetDataEvent
+    GetAllreviewdata, GetIngredient, GetAllInstruction, GetAllRecipeByDifficulty, Getdatadifficult,DataEvent
 }
