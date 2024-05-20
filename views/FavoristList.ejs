@@ -245,15 +245,55 @@
             </div>
 
             <div class="col-9">
-                <div class="alert alert-primary mt-3" role="alert">
-                    <marquee behavior="" direction="">
-                        GoFood.com
-                    </marquee>
+                <div class="alert alert-primary mt-3 text-center " style="text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                height: 100px;" role="alert">
+                    <h1>FAVORISTLIST</h1>
                 </div>
 
                 <div class="row">
-                    <div id="task-body" class="col-3 " style="flex: 1;">
-
+                    <div id="task-body-FA" class="col-3 " style=".card-container {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        padding: 0 15px; /* Thêm padding để tạo khoảng cách giữa các card */
+                    }
+                    
+                    .card {
+                        width: 400px;
+                        width: calc(33.33% - 20px); /* 33.33% để hiển thị 3 card trên mỗi hàng */
+                        margin-bottom: 20px;
+                        height: 300px;
+                        
+                    }">
+                        <div class="card-container row">
+                            <% favorist.forEach(item=> { %>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img src="/img/<%= item.IMG_URL %>" class="img-fluid" alt="...">
+                                        <div class="card-body">
+                                            <h6>
+                                                <%= item.RECIPE_NAME %>
+                                            </h6>
+                                            <%= item.DESCRIPTION %>
+                                        </div>
+                                        <div class="card-footer text-end mb-3">
+                                            <button type="button" class="btn btn-warning"
+                                                data-id="<%= item.RECIPE_ID %>" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal1"> Đánh Giá </button>
+                                            <button type="button" class="btn btn-outline-success"
+                                                data-id="<%= item.RECIPE_ID %>" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"> Chi Tiết </button>
+                                            <button type="button" class="btn btn-outline-success btn-save"
+                                                data-id="<%= item.RECIPE_ID %>"> Lưu </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                        </div>
                     </div>
                 </div>
 

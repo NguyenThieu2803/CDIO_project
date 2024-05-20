@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { GetAllReviews,GetFilteBydifficulty } = require('../../controller/APIcontroller');
+const {GetFilteBydifficulty } = require('../../controller/APIcontroller');
 
 
 const init_API_FilterBydif = (app) => {
