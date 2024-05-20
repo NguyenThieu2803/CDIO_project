@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const InstructionContent = document.querySelector('.Intsruction_content');
   const dropEventbtn = document.querySelector('#select_event');
   const dropDifbtn = document.querySelector('#select_dif');
-
+  const Imgrecipe = document.querySelector('.imgrecipe')
   // Function to render the table rank and cards from API data
   const showRanktable = async (difficulty = null, event = null) => {
     try {
@@ -24,19 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
       TableRank.innerHTML = '';
       Tasksbody.innerHTML = '';
 
-      // Filter recipes based on difficulty and event if provided
-      const filteredRecipes = sortedRecipes.filter(recipe => {
-        return (!difficulty || recipe.DIFFICULTY_LEVEL === difficulty) &&
-               (!event || recipe.EVENT === event);
-      });
 
       const filteredTasks = Tasks.filter(task => {
         return (!difficulty || task.DIFFICULTY_LEVEL === difficulty) &&
-               (!event || task.EVENT === event);
+          (!event || task.EVENT === event);
       });
 
       // Append each recipe to the table
-      filteredRecipes.forEach(item => {
+      sortedRecipes.forEach(item => {
         TableRank.innerHTML += `
           <tr>
             <th scope="row">${item.RECIPE_NAME}</th>
@@ -89,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error fetching sorted recipes:', error);
     }
   };
-
   // Function to show danh gia model
   const showDanhgiamodel = async (Id) => {
     console.log(Id); // Log the Id when the button is clicked
@@ -97,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const url = `http://localhost:3000/api/v1/dataReview/${Id}`;
       const response = await axios.get(url);
       const data = response.data.data;
-
+console.log(data);
       // Data ingredients
       const result = await axios.get(`http://localhost:3000/api/v1/Ingredient/${Id}`);
       const Ingredient = result.data.data;
@@ -108,16 +102,28 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(Ingredient); // Log the data when the button is clicked
       console.log(Instruction); //
       console.log(data); // Log the data when the button is clicked
-      if (!data || data.length < 1 || Ingredient.length < 1) {
-        console.log('No review found.');
-        return;
-      }
+      // if (!data || data.length < 1 || Ingredient.length < 1) {
+      //   console.log('No review found.');
+      //   return;
+      // }
+      //IMG CHITIET 
+      Imgrecipe.innerHTML = '';
 
+     let IMG;
+      data.forEach(item => {
+        IMG=item.RECIPE.IMG_URL;
+      }); 
+      console.log(IMG); 
+      
+      // Log the data when the button is clicked
+      Imgrecipe.innerHTML = `<img src="/img/${IMG}" class="img-fluid mb-3"
+alt="...">`;
       // Clear existing content of ModalContent
       ModalContent.innerHTML = '';
 
       // Append new content to ModalContent
       data.forEach(item => {
+        
         ModalContent.innerHTML += `
           <a class="d-flex align-items-center nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/img_user/${item.USER_IMG}" class="user-img" alt="user avatar" style="width: 50px;">
