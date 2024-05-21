@@ -30,6 +30,10 @@ const GetHoiDap = async (req,res)=>{
    res.render('HoiDap.ejs');
 }
 
+const GetLogin = async (req,res)=>{
+   res.render('Login.ejs');
+}
+
 
 const CreateRecipe= async (req,res)=>{
    res.render('CreateRecipe.ejs');
