@@ -82,7 +82,15 @@ const DataEvent = async () => {
     })
     return event;
 }
+const DataRecipeByid = async (id) => {
+    const data = await Recipe.findAll({
+        where:{
+            RECIPE_ID: id
+        }
+    })
+    return data;
+}
 
 module.exports = {
-    GetAllreviewdata, GetIngredient, GetAllInstruction, GetAllRecipeByDifficulty, Getdatadifficult,DataEvent
+    GetAllreviewdata, GetIngredient, GetAllInstruction, GetAllRecipeByDifficulty, Getdatadifficult,DataEvent,DataRecipeByid
 }

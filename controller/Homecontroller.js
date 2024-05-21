@@ -11,7 +11,7 @@ const Distributor = require('../model/DISTRIBUTOR');
 
 
 const { defineAssociation, } = require('../config/associations');
-
+const {dataFavoristList} = require('../controller/APIcontroller');
 
 defineAssociation();
 
@@ -38,8 +38,12 @@ const GetLogin = async (req,res)=>{
 const CreateRecipe= async (req,res)=>{
    res.render('CreateRecipe.ejs');
 }
+const FavoristListPage = async (req,res)=>{
+const favorist=await dataFavoristList();
+   res.render('FavoristList.ejs',{favorist:favorist});
 
+}
 module.exports = {
-   GetHomepage,GetgioithieuPage,GetHoiDap,CreateRecipe,GetLogin
+   GetHomepage,GetgioithieuPage,GetHoiDap,CreateRecipe,FavoristListPage
 }
 

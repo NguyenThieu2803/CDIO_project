@@ -1,0 +1,141 @@
+.app-container {
+    padding: 12px;
+    min-height: 380px;
+    background-color: #a9abad;
+    /* container background color */
+    border-radius: 8px;
+    width: 300px;
+    height: 450px;
+
+
+}
+
+.app-container .danhgia {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    height: 53px;
+}
+
+h1 {
+    width: 230px;
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    background-color: rgb(160, 165, 223);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* SRART */
+.star_wrap {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+input {
+    appearance: none;
+}
+
+input::before {
+    content: "\2605";
+    color: #ccc;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+input:checked::before,
+input:checked~input::before {
+    color: #ffb800;
+}
+
+.ghichu {
+    margin-bottom: 20px;
+    /* Khoảng cách dưới */
+}
+
+.ghichu div {
+    font-weight: bold;
+    /* In đậm cho phần tiêu đề */
+}
+
+.ghichu textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.ghichu button {
+    background-color: lightsalmon;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    float: right;
+}
+
+.ghichu button:hover {
+    background-color: rgb(248, 246, 246);
+    color: lightsalmon;
+}
+/* css model danh gia */
+.danhgia {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.star_wrap {
+    display: flex;
+    gap: 5px;
+}
+
+.star_wrap input[type="radio"] {
+    display: none;
+}
+
+.star_wrap label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ffc107;
+}
+
+.star_wrap label:before {
+    content: '\2605'; /* Unicode star character */
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #000;
+}
